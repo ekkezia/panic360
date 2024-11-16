@@ -1,0 +1,208 @@
+:root {
+  --background-color: fuchsia;
+  --primary-color: #4a91e2;
+  --secondary-color: rgb(254, 92, 254);
+  --hover-color: #4a91e2;
+  --button-hover-color: lightgrey;
+}
+
+.App {
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--background-color);
+}
+
+.verificationContainer {
+  width: fit-content;
+  height: fit-content;
+  max-width: 300px;
+  padding: 8px;
+  border-radius: 2px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: fixed;
+  z-index: 11;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  visibility: hidden;
+  transition-duration: opacity 2s;
+}
+
+.canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.1;
+  transition-duration: 2s;
+  z-index: 0;
+}
+
+.show {
+  opacity: 1;
+  transition-duration: 2s;
+}
+
+.hide {
+  opacity: 0;
+  transition-duration: 2s;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: fit-content;
+  height: fit-content;
+  gap: 1px;
+}
+
+.title {
+  background-color: var(--primary-color);
+  padding: 16px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  width: 100%;
+}
+
+.title p {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.title h4 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.imgContainer {
+  aspect-ratio: 1/1;
+  width: 80px;
+  height: 80px;
+  border: 3px solid white;
+  &:hover {
+    border: 3px solid var(--primary-color);
+  }
+}
+
+.imgContainer.selected {
+  border: 3px solid var(--primary-color);
+}
+
+img {
+  aspect-ratio: 1/1;
+  width: 74px;
+  height: 74px;
+}
+
+.bottomBar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottomBar-left {
+  display: flex;
+}
+
+#btn-skip {
+  background-color: var(--primary-color);
+  padding: 4px 16px;
+  text-transform: capitalize;
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+  &:hover {
+    background-color: var(--hover-color);
+  }
+}
+
+.curtain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--background-color);
+  z-index: 10;
+  opacity: 1;
+  transition-duration: 2s;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.curtain.hide {
+    opacity: 0;
+      transition-duration: 2s;
+}
+
+.curtain h1 {
+  color: var(--secondary-color);
+  font-weight: 700;
+  text-transform: capitalize;
+  font-family: "Rubik Dirt", system-ui;
+  font-size: 8rem;
+}
+
+.curtain p {
+  color: var(--secondary-color);
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: 1rem;
+}
+
+/* Popup container */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  aspect-ratio: 1/1;
+  border-radius: 2px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background-color: var(--button-hover-color);
+  }
+}
+
+.popup:hover .popuptext {
+    visibility: visible;
+    font-size: 11px;
+    line-height: 1.2;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  visibility: hidden;
+  width: fit-content;
+  min-width: 80px;
+  max-width: 160px;
+  background-color: white;
+  color: var(--primary-color);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  border-radius: 3px;
+  padding: 4px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -40px;
+}
+
