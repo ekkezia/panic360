@@ -50,10 +50,7 @@ function App() {
   // Image selection validation
   useEffect(() => {
     // check that there is at least 1 image that has the same category as the one being asked in QUESTION
-    const checkQuestionValidity = Object.values(shuffledImages).some((img) => {
-      if (img.category === currentCategory) return true; // question is NOT asking for valid category, thus user has to answer with SKIP
-      else return false; // question is asking for valid category 
-    })
+  const checkQuestionValidity = Object.values(shuffledImages).some((img) => img.category === currentCategory);
     
     const selectedImagesCategoryIsValid = Object.values(shuffledImages).every((img) => {
       if (img.category === currentCategory) {
@@ -63,9 +60,8 @@ function App() {
       }
     });
 
-    console.log('selected', selectedImagesCategoryIsValid, checkQuestionValidity, shuffledImages)
+    console.log('selected', checkQuestionValidity, status !== STATUS.IDLE)
       if (selectedImagesCategoryIsValid && checkQuestionValidity && status !== STATUS.IDLE) {
-        console.log('here')
         setStatus(STATUS.FINISH);
       }
 
