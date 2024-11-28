@@ -38,13 +38,15 @@ const VerificationContainer = React.forwardRef<HTMLDivElement, TVerificationCont
         <div className="bottomBar">
           <div className="bottomBar-left">
             <div className="popup" id="restart" onClick={onShuffle}>↪️
-              <span className="popuptext" id="myPopup">Reshuffle the question & images</span>
+              <span className="popuptext" id="myPopup">Panicking much? Reshuffle the question & images</span>
             </div>
             <div className="popup" id="music">🎧
-              <span className="popuptext" id="myPopup">Music</span>
+              <a href="https://youtube.com/@paniclibrary?si=a-cbZBL6XFi7e0xl" target="_blank">
+                <span className="popuptext" id="myPopup">Music</span>
+              </a>
             </div>
             <div className="popup" id="info">ℹ️
-              <span className="popuptext" id="myPopup">Click on any of the image</span>
+              <span className="popuptext" id="myPopup">Click on any of the image that corresponds with the given prompt. It could be more than 1. If there's none that matches, make sure that none of the images are clicked and then click SKIP. </span>
             </div>
           </div>
 

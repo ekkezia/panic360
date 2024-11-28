@@ -17,6 +17,7 @@ function App() {
   const [currentCategory, setCurrentCategory] = useState(QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)])
   const [shuffledImages, setShuffledImages] = useState<TImage>(Object.fromEntries(Object.entries(IMAGES).slice(0, 9)));
   const [status, setStatus] = useState(STATUS.IDLE);
+const [verified, setVerified] = useState(false);
 
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const curtainRef = useRef<HTMLDivElement | null>(null);
@@ -44,6 +45,7 @@ function App() {
 
     if (selectedImagesCategoryIsValid) {
       setStatus(STATUS.FINISH);
+      setVerified(true)
     }
   }, [currentCategory, shuffledImages])
 
@@ -60,29 +62,18 @@ function App() {
       }
     });
 
-    console.log('selected', checkQuestionValidity, status !== STATUS.IDLE)
-      if (selectedImagesCategoryIsValid && checkQuestionValidity && status !== STATUS.IDLE) {
+    if (checkQuestionValidity) {
+    if (selectedImagesCategoryIsValid && checkQuestionValidity && status === STATUS.START) {
         setStatus(STATUS.FINISH);
+        setVerified(true)
       }
+    }
 
   }, [shuffledImages, currentCategory, status])
 
-
   // Show verification container on click
 useEffect(() => {
-  console.log('status', status)
-  if (status === STATUS.FINISH) {
-    if (curtainRef.current) {
-      curtainRef.current.classList.add('hide');
-    }
-    if (canvasRef.current) {
-      canvasRef.current.classList.add('show');
-    }
-
-    if (verificationRef.current) {
-      verificationRef.current.classList.add('hide');
-    }
-  }
+  // console.log('status', status)
 
   const handleClickScreen = (event: MouseEvent) => {
       const x = event.clientX;
@@ -92,7 +83,7 @@ useEffect(() => {
         verificationRef.current.style.visibility = "visible";
         verificationRef.current.style.top = `${y}px`;
         verificationRef.current.style.left = `${x}px`;
-        console.log('Position:', x, y);
+        // console.log('Position:', x, y);
       }
 
       // Only set the status to START after moving the container
@@ -106,6 +97,22 @@ useEffect(() => {
   };
 }, [status]);
 
+useEffect(() => {
+  if (verified) {
+    if (curtainRef.current) {
+      curtainRef.current.classList.add('hide');
+    }
+    if (canvasRef.current) {
+      canvasRef.current.classList.add('show');
+    }
+
+    if (verificationRef.current) {
+      verificationRef.current.classList.add('hide');
+    }
+  }
+
+}, [verified])
+
   return (
     <div className="w-screen h-screen App">
       <ModelCanvas ref={canvasRef} />
@@ -113,10 +120,10 @@ useEffect(() => {
       <div className="curtain" ref={curtainRef}>
         <p></p>
         <FlickeringText /> 
-        <p>built by @ekezia {status}</p>
+        <p>built by @ekezia</p>
       </div>
 
-     <VerificationContainer images={shuffledImages} currentCategory={currentCategory} onShuffle={handleShuffle} onSelect={setShuffledImages} onSkip={handleSkip} ref={verificationRef} />
+     {!verified && <VerificationContainer images={shuffledImages} currentCategory={currentCategory} onShuffle={handleShuffle} onSelect={setShuffledImages} onSkip={handleSkip} ref={verificationRef} />}
     </div>
   );
 }
