@@ -9,10 +9,11 @@ import FlickeringText from './components/atoms/flickering-text';
 const QUESTIONS = ['aisha', 'panic library', 'loveless', 'kezia']
 
 const STATUS = {
-    IDLE: 1,
+  IDLE: 1,
   START: 2,
   FINISH: 3,
 }
+
 function App() {
   const [currentCategory, setCurrentCategory] = useState(QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)])
   const [shuffledImages, setShuffledImages] = useState<TImage>(Object.fromEntries(Object.entries(IMAGES).slice(0, 9)));
@@ -73,8 +74,6 @@ const [verified, setVerified] = useState(false);
 
   // Show verification container on click
 useEffect(() => {
-  // console.log('status', status)
-
   const handleClickScreen = (event: MouseEvent) => {
       const x = event.clientX;
       const y = event.clientY;
@@ -83,7 +82,6 @@ useEffect(() => {
         verificationRef.current.style.visibility = "visible";
         verificationRef.current.style.top = `${y}px`;
         verificationRef.current.style.left = `${x}px`;
-        // console.log('Position:', x, y);
       }
 
       // Only set the status to START after moving the container
@@ -114,7 +112,7 @@ useEffect(() => {
 }, [verified])
 
   return (
-    <div className="w-screen h-screen App">
+    <div className="App">
       <ModelCanvas ref={canvasRef} />
 
       <div className="curtain" ref={curtainRef}>

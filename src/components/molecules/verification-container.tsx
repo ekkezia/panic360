@@ -37,16 +37,25 @@ const VerificationContainer = React.forwardRef<HTMLDivElement, TVerificationCont
         </div>
         <div className="bottomBar">
           <div className="bottomBar-left">
-            <div className="popup" id="restart" onClick={onShuffle}>↪️
+            <div className="popup" id="restart" onClick={onShuffle}>
+              <img src="/icons/restart.svg" alt="restart" className="icon" />
+
               <span className="popuptext" id="myPopup">Panicking much? Reshuffle the question & images</span>
             </div>
-            <div className="popup" id="music">🎧
-              <a href="https://youtube.com/@paniclibrary?si=a-cbZBL6XFi7e0xl" target="_blank">
+            <a href="https://youtube.com/@paniclibrary?si=a-cbZBL6XFi7e0xl" target="_blank" rel="noreferrer">
+            <div className="popup" id="music">
+                <img src="/icons/audio.svg" alt="audio" className="icon" />
                 <span className="popuptext" id="myPopup">Music</span>
-              </a>
             </div>
-            <div className="popup" id="info">ℹ️
-              <span className="popuptext" id="myPopup">Click on any of the image that corresponds with the given prompt. It could be more than 1. If there's none that matches, make sure that none of the images are clicked and then click SKIP. </span>
+            </a>
+            <div className="popup" id="info">
+              <img src="/icons/info.svg" alt="info" className="icon" />
+              <span className="popuptext" id="myPopup">Click on any of the image that corresponds with the given prompt. It could be more than 1. If you're correct, then the CAPTCHA will verify itself and reveal PANIC LIBRARY for you.
+              <br /><br />
+              You can click again at the selected images to unselect them.
+              <br /><br />
+              If there's none that matches, make sure that none of the images are clicked and then click SKIP. 
+              </span>
             </div>
           </div>
 
