@@ -8,7 +8,7 @@ type ModelCanvasProps = Omit<CanvasProps, 'children'>;
 
 const ModelCanvas = forwardRef<HTMLDivElement, ModelCanvasProps>((props, ref) => {
   return (
-    <div className="canvas" ref={ref}>
+    <div className="canvas hide" ref={ref}>
     <Canvas
       {...props}
       style={{

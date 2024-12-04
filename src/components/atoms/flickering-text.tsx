@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 
-const TEXT = ['PANIC360', 'CLICK ANYWHERE']
-const FlickeringText = () => {
+const FlickeringText: React.FC<{ textArray: string[] }> = ({ textArray }) => {
   const [textIndex, setTextIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTextIndex(prevIndex => (prevIndex + 1) % 2);
+      setTextIndex(prevIndex => (prevIndex + 1) % textArray.length);
     }, 100)
 
     return () => clearInterval(interval);
@@ -14,7 +13,7 @@ const FlickeringText = () => {
 
   return (
     <h1>
-      {TEXT[textIndex]}
+      {textArray[textIndex]}
     </h1>
   )
 }
