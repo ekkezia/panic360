@@ -3,7 +3,7 @@ import React from "react";
 
 const ModelLoader:React.FC = () => {
     const { progress } = useProgress();
-    return <Html center>☕️ {progress}%</Html>;
+    return <Html center>🔨 {progress}%</Html>;
   }
   
 export default ModelLoader
