@@ -32,6 +32,12 @@
   transition-duration: opacity 2s;
 }
 
+.verificationText {
+  text-align: left;
+  font-size: 14px;
+  padding: 16px;
+}
+
 .canvas {
   position: fixed;
   top: 0;
@@ -42,6 +48,7 @@
   transition-duration: 2s;
   z-index: 0;
   opacity: 1;
+  cursor: move;
 }
 
 .show {
@@ -61,6 +68,7 @@
   width: fit-content;
   height: fit-content;
   gap: 1px;
+  padding: 4px 0px;
 }
 
 .title {
@@ -130,6 +138,7 @@ img {
   color: white;
   font-weight: 600;
   font-size: 12px;
+  cursor: ponter;
   &:hover {
     background-color: var(--hover-color);
   }
@@ -197,6 +206,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   &:hover {
     background-color: var(--button-hover-color);
   }
@@ -228,4 +238,19 @@ img {
 .icon {
   width: 24px;
   height: 24px;
+}
+
+.iconBtn {
+  position: fixed;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: lightgrey;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+}
+
+a {
+  text-decoration: wavy fuchsia;
 }

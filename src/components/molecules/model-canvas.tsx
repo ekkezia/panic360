@@ -3,12 +3,27 @@ import { Canvas, CanvasProps } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import ModelLoader from '../atoms/model-loader';
 import ModelEnv from '../atoms/model-env';
+import IconButton from '../atoms/icon-button';
+import { useStatusContext } from '../../contexts/status-context';
+import { STATUS } from '../../config/config';
 
 type ModelCanvasProps = Omit<CanvasProps, 'children'>;
 
 const ModelCanvas = forwardRef<HTMLDivElement, ModelCanvasProps>((props, ref) => {
+  const { setStatus } = useStatusContext()
+
   return (
     <div className="canvas hide" ref={ref}>
+    <IconButton 
+      className="iconBtn"
+      id="info" 
+      iconSrc="/icons/info.svg" 
+      iconAlt="info"
+      onClick={() => setStatus(STATUS.SUCCESS)}
+    >
+      What's up with this?! Panic!!
+    </IconButton>
+
     <Canvas
       {...props}
       style={{

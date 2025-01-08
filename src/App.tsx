@@ -1,14 +1,13 @@
 import ModelCanvas from './components/molecules/model-canvas';
 import VerificationContainer from './components/molecules/verification-container';
-import { IMAGES } from './config/paths';
 import './App.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import FlickeringText from './components/atoms/flickering-text';
-import { QUESTIONS, STATUS, TEXT } from './config/config';
+import { STATUS, TEXT } from './config/config';
+import { useStatusContext } from './contexts/status-context';
 
 function App() {
-  const [status, setStatus] = useState(STATUS.IDLE);
-  const [verified, setVerified] = useState(false);
+  const { status, setStatus } = useStatusContext();
 
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const curtainRef = useRef<HTMLDivElement | null>(null);
@@ -27,7 +26,9 @@ function App() {
         }
 
         // Only set the status to START after moving the container
-        setStatus(STATUS.START);
+        if (status === STATUS.INITIALIZE) {
+          setStatus(STATUS.INSTRUCTION);
+        }
       }
 
     document.body.addEventListener('click', handleClickScreen);
@@ -38,45 +39,31 @@ function App() {
   }, [status]);
 
   useEffect(() => {
-    if (verified) {
+    if (status === STATUS.SUCCESS) {
       if (curtainRef.current && canvasRef.current) {
         curtainRef.current.classList.add('hide');
       }
       if (canvasRef.current) {
         canvasRef.current.classList.remove('hide');
       }
-
-      if (verificationRef.current) {
-        verificationRef.current.classList.add('hide');
-      }
     }
-  }, [verified])
+  }, [status])
 
-  const handleValid = () => {
-    setStatus(STATUS.FINISH);
-    setVerified(true);
-  }
 
   return (
-    <div className="App">
-      <ModelCanvas ref={canvasRef} />
+      <div className="App">
+        <ModelCanvas ref={canvasRef} />
 
-      <div className="curtain" ref={curtainRef}>
-        <p></p>
-        <FlickeringText textArray={TEXT} /> 
-        <p>built by @ekezia</p>
-      </div>
+        <div className="curtain" ref={curtainRef}>
+          <p></p>
+          <FlickeringText textArray={TEXT} /> 
+          <p>built by @ekezia</p>
+        </div>
 
-     {!verified && 
         <VerificationContainer 
-          questions={QUESTIONS} 
-          images={IMAGES} 
-          status={status} 
-          onValid={handleValid} 
-          ref={verificationRef} 
-        />
-      }
-    </div>
+            ref={verificationRef} 
+          />
+      </div>
   );
 }
 
