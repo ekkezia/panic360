@@ -245,10 +245,18 @@ img {
   left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  background-color: lightgrey;
+  background-color: fuchsia;
   z-index: 999;
   width: 40px;
   height: 40px;
+}
+
+.iconBtn img {
+    filter: invert(0%) !important;
+}
+
+.popup img {
+    filter: invert(50%);
 }
 
 a {
